@@ -5,8 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Principal"  WindowStartupLocation="CenterScreen" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#EEEEEE" Grid.Row="0">
+            <Menu Background="Transparent">
+
+                <MenuItem Header="Cadastro Geral">
+                    <MenuItem Header="Usuários"/>
+                    <MenuItem Header="Tarefas"/>
+                    <MenuItem Header="Desenvolvedor"/>
+                    <MenuItem Header="Status"/>
+                </MenuItem>
+
+            </Menu>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Sistema de Tarefas"
+               FontSize="26"
+               FontWeight="Bold"
+               Margin="0,0,0,20"/>
+
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
+
+                <Border Width="200" Height="150" Margin="10"
+                Background="#3498DB" CornerRadius="10">
+                    <Button Background="Transparent"
+                    BorderThickness="0"
+                    Click="AbrirTarefas_Click">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="📋" FontSize="40" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Tarefas" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+
+                <Border Width="200" Height="150" Margin="10"
+                Background="#2ECC71" CornerRadius="10">
+                    <Button Background="Transparent" BorderThickness="0">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="👤" FontSize="40" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Usuários" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+
+                <Border Width="200" Height="150" Margin="10"
+                Background="#9B59B6" CornerRadius="10">
+                    <Button Background="Transparent" BorderThickness="0">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="📊" FontSize="40" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Dashboard" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+
+            </WrapPanel>
+
+        </Grid>
 
     </Grid>
 </Window>

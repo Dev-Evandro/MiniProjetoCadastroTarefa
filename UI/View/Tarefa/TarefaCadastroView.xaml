@@ -8,7 +8,7 @@
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:local="clr-namespace:UI.View"
     mc:Ignorable="d"
-    Title="TarefaCadastroView" Height="450" Width="800" Loaded="FrmTarefaCadastro_Loaded">
+    Title="TarefaCadastroView" Height="450" Width="800" Loaded="TarefaCadastro_Loaded">
     <TabControl Margin="0,10,0,0" SelectedIndex="{Binding AbaSelecionada}">
         <TabItem Header="Cadastro">
             <Grid Background="White">

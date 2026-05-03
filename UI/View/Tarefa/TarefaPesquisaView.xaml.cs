@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UI.ViewModel.Tarefa;
+using Core.Enums;
 
 namespace UI.View.Tarefa
 {
@@ -22,11 +25,30 @@ namespace UI.View.Tarefa
         public TarefaPesquisaView()
         {
             InitializeComponent();
+            var vm = new TarefaPesquisaViewModel();
+            vm.AbrirCadastro += Vm_AbrirCadastro;
+            DataContext = vm;
         }
 
+        private void Vm_AbrirCadastro(
+            TAREFA tarefa,
+            AcaoFormulario acao)
+        {
+            var frm = new TarefaCadastroView(acao, tarefa);
+            frm.ShowDialog();
+        }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (DataContext is TarefaPesquisaViewModel vm
+               && vm.TarefaSelecionada != null)
+            {
+                vm.AlterarCommand.Execute(null);
+            }
+        }
 
+        private void cmdSair_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

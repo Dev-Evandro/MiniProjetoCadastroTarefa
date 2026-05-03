@@ -6,7 +6,98 @@
         xmlns:local="clr-namespace:UI.View"
         mc:Ignorable="d"
         Title="EtapaCadastroView" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="White">
+        <DockPanel>
+            <StackPanel Margin="0,0,0,10" DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Visibility="Hidden">
+                    <StackPanel Margin="0,0,5,0" Orientation="Vertical">
+                        <Label Content="Código" />
+                    </StackPanel>
+                    <StackPanel Margin="0,0,5,0" Orientation="Vertical">
+                        <Label Content="Usuario" />
+
+                    </StackPanel>
+                    <StackPanel Margin="0,0,5,0" Orientation="Vertical">
+                        <Label Content="Atualização" />
+
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="220,5,0,0"  >
+
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel x:Name="stpRodape" DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
+                    <Label Content="{Binding Etapa.Id}"/>
+                </StackPanel>
+                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
+                    <Label Content="Usuario" x:Name="usuarioMatricula" Visibility="Hidden"/>
+
+                </StackPanel>
+                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
+                    <!-- Deveria ter uma data de atualziação     <Label Content="{Binding Etapa.DataAtualizacao}" />-->
+
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="350">
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <Label Content="Titulo"  Margin="0,5,40,0"/>
+                        <TextBox Width="250" Text="{Binding Etapa.Titulo, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <Label Content="Descricao"  Margin="0,5,19,0"/>
+                        <TextBox Width="250"
+                             Height="180"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Text="{Binding Etapa.Descricao}" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Width="70" HorizontalAlignment="Right">
+                        <CheckBox Content="Inativo" Margin="0,5,5,0" IsChecked="{Binding Etapa.Inativo}" />
+                    </StackPanel>
+                    <!-- Deveria ter uma data de cadastro <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Content="Data Cadastro"  Margin="0,5,39,0"/>
+                    <DatePicker SelectedDate="{Binding Etapa.DataCadastro}" />
+                </StackPanel>-->
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <Label Content="Data Inicio"  Margin="0,5,39,0"/>
+                        <DatePicker SelectedDate="{Binding Etapa.DataInicio}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <Label Content="Data Prevista"  Margin="0,5,27,0"/>
+                        <DatePicker SelectedDate="{Binding Etapa.DataFimPrevisto}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <Label Content="Data Fim"  Margin="0,5,50,0"/>
+                        <DatePicker SelectedDate="{Binding Etapa.DataFimReal}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,195,0,0" HorizontalAlignment="Center">
+                        <Button Content="Salvar"
+                            Width="100"
+                            Margin="0,0,10,0"
+                            Command="{Binding SalvarCommand}"/>
+
+                        <Button Content="Cancelar"
+                            Width="100"
+                            Command="{Binding CancelarCommand}"/>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

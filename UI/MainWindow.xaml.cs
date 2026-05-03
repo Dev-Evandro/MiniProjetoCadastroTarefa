@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Application.Services;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UI.View.Tarefa;
 
 namespace UI
 {
@@ -19,6 +21,29 @@ namespace UI
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var configService = new ConfiguracaoService();
+                configService.Carregar();
+
+                MessageBox.Show("Configuração carregada com sucesso!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: " + ex.Message);
+                System.Windows.Application.Current.Shutdown();
+            }
+        }
+
+        private void AbrirTarefas_Click(object sender, RoutedEventArgs e)
+        {
+            TarefaPesquisaView f = new TarefaPesquisaView();
+            f.Show();
+            this.Close();
         }
     }
 }
