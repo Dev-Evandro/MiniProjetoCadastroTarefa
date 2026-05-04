@@ -12,6 +12,7 @@ using Application.Services;
 using System.Windows.Input;
 using System.Runtime.CompilerServices;
 using UI.ViewModel.RelayCommand;
+using System.Windows;
 
 namespace UI.ViewModel.Tarefa
 {
@@ -22,12 +23,9 @@ namespace UI.ViewModel.Tarefa
         private readonly TarefaService _service;
         private bool _procurarInativo;
         public string TextoCheckBox => ProcurarInativo ? "Procurar Inativo" : "Procurar Ativo";
-
         public ObservableCollection<TAREFA> ListaTarefas { get; set; }
         = new ObservableCollection<TAREFA>();
-
         public event Action<TAREFA, AcaoFormulario> AbrirCadastro;
-
         public TAREFA TarefaSelecionada
         {
             get => _tarefaSelecionada;
@@ -37,7 +35,6 @@ namespace UI.ViewModel.Tarefa
                 OnPropertyChanged();
             }
         }
-
         public TarefaPesquisaViewModel()
         {
             _service = new TarefaService();
@@ -49,7 +46,6 @@ namespace UI.ViewModel.Tarefa
 
             CarregarTarefas();
         }
-        
         public string FiltroTitulo
         {
             get => _filtroTitulo;
@@ -59,13 +55,10 @@ namespace UI.ViewModel.Tarefa
                 OnPropertyChanged();
             }
         }
-
         public ICommand PesquisarCommand { get; }
         public ICommand IncluirCommand { get; }
         public ICommand AlterarCommand { get; }
         public ICommand ExcluirCommand { get; }
-
-        
         public bool ProcurarInativo
         {
             get => _procurarInativo;
@@ -77,23 +70,27 @@ namespace UI.ViewModel.Tarefa
                 Pesquisar(null);
             }
         }
-
-        
         private void CarregarTarefas()
         {
 
         }
-
         private async void Pesquisar(object obj)
         {
-            ListaTarefas.Clear();
+            try
+            {
+                ListaTarefas.Clear();
 
-            var lista = await _service.ListarAsync(FiltroTitulo, ProcurarInativo);
+                var lista = await _service.ListarAsync(FiltroTitulo, ProcurarInativo);
 
-            foreach (var item in lista)
-                ListaTarefas.Add(item);
+                foreach (var item in lista)
+                    ListaTarefas.Add(item);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
-
         private void Incluir(object obj)
         {
             AbrirCadastro?.Invoke(null, AcaoFormulario.Incluir);
@@ -104,7 +101,6 @@ namespace UI.ViewModel.Tarefa
 
             AbrirCadastro?.Invoke( TarefaSelecionada,AcaoFormulario.Alterar);
         }
-
         private void Excluir(object obj)
         {
             if (TarefaSelecionada == null) return;
@@ -112,15 +108,11 @@ namespace UI.ViewModel.Tarefa
             AbrirCadastro?.Invoke(
                 TarefaSelecionada, AcaoFormulario.Excluir);
         }
-
-
         private bool PodeAlterarExcluir(object obj)
         {
             return TarefaSelecionada != null;
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

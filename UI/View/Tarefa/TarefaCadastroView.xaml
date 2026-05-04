@@ -8,169 +8,164 @@
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:local="clr-namespace:UI.View"
     mc:Ignorable="d"
-    Title="TarefaCadastroView" Height="450" Width="800" Loaded="TarefaCadastro_Loaded">
+    Title="TarefaCadastroView" Height="600" Width="900" Loaded="TarefaCadastro_Loaded">
     <TabControl Margin="0,10,0,0" SelectedIndex="{Binding AbaSelecionada}">
         <TabItem Header="Cadastro">
-            <Grid Background="White">
-                <DockPanel>
-                    <StackPanel Margin="0,0,0,10" DockPanel.Dock="Top" Orientation="Horizontal"
-                        VerticalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" Visibility="Hidden">
-                            <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                                <Label Content="Código" />
-                            </StackPanel>
-                            <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                                <Label Content="Usuario" />
+            <Grid Background="#F5F5F5" Margin="10">
 
-                            </StackPanel>
-                            <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                                <Label Content="Atualização" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                            </StackPanel>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
-                            Margin="220,5,0,0">
-                            <Button x:Name="btnConfirmar" Content="_Confirmar" Margin="0,0,10,0"
-                                Click="btnConfirmar_Click" />
-                            <Button x:Name="btnCancelar" Content="Ca_ncelar"
-                                Click="btnCancelar_Click" />
-                        </StackPanel>
+                <!-- 🔵 AÇÕES -->
+                <Border Background="White" Padding="10" CornerRadius="5" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Confirmar" x:Name="btnConfirmar"
+                        Style="{StaticResource BtnSucesso}"
+                        Click="btnConfirmar_Click"/>
+
+                        <Button Content="Cancelar" x:Name="btnCancelar"
+                        Style="{StaticResource BtnPerigo}"
+                        Click="btnCancelar_Click"/>
                     </StackPanel>
+                </Border>
 
-                    <StackPanel x:Name="stpRodape" DockPanel.Dock="Bottom" Orientation="Horizontal">
-                        <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                            <Label Content="Código" x:Name="codigoGuid" />
-                        </StackPanel>
-                        <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                            <Label Content="Usuario" x:Name="usuarioMatricula" Visibility="Hidden" />
+                <!-- 🔵 FORMULÁRIO -->
+                <Border Grid.Row="1" Background="White" Padding="15" CornerRadius="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                        </StackPanel>
-                        <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                            <Label Content="Atualização" x:Name="dataAtualizacao" />
+                        <!-- ESQUERDA -->
+                        <Grid Margin="0,0,10,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                        </StackPanel>
+                            <Label Content="Título"/>
+                            <TextBox Grid.Row="1" x:Name="txtTitulo"
+                             Text="{Binding Titulo}"
+                             Height="30"/>
+
+                            <Label Grid.Row="2" Content="Descrição" Margin="0,10,0,0"/>
+                            <TextBox Grid.Row="3" x:Name="txtDescricao"
+                             Height="150"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"/>
+                        </Grid>
+
+                        <!-- DIREITA -->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="Status"/>
+                            <ComboBox Grid.Row="1" 
+                                      Height="30" 
+                                      x:Name="cmbStatus" 
+                                      DisplayMemberPath="Nome" 
+                                      SelectedValuePath="Id"/>
+
+                            <Label Grid.Row="2" Content="Desenvolvedor" Margin="0,10,0,0"/>
+                            <ComboBox Grid.Row="3" 
+                                      Height="30" 
+                                      x:Name="cmbDev"
+                                      DisplayMemberPath="Nome" 
+                                      SelectedValuePath="Id"/>
+
+                            <CheckBox Grid.Row="4" x:Name="chkInativo"
+                              Content="Inativo"
+                              Margin="0,10,0,0"/>
+
+                            <StackPanel Grid.Row="5" Margin="0,10,0,0">
+                                <Label Content="Data Início"/>
+                                <DatePicker x:Name="DateInicio"/>
+
+                                <Label Content="Data Prevista" Margin="0,10,0,0"/>
+                                <DatePicker x:Name="DatePrevisto"/>
+
+                                <Label Content="Data Fim" Margin="0,10,0,0"/>
+                                <DatePicker x:Name="DateFim"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!-- 🔵 RODAPÉ -->
+                <Border Grid.Row="2" Background="White" Padding="10" CornerRadius="5" Margin="0,10,0,0">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Código: ..." x:Name="codigoGuid" Margin="0,0,20,0"/>
+                        <TextBlock Text="Atualização: ..." x:Name="dataAtualizacao"/>
                     </StackPanel>
+                </Border>
 
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical" Width="350">
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Label Content="Titulo" Margin="0,5,40,0" />
-                                <TextBox x:Name="txtTitulo" Width="250" KeyDown="txtTitulo_KeyDown" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Label Content="Descricao" Margin="0,5,19,0" />
-                                <TextBox x:Name="txtDescricao" Width="250" Height="180"
-                                    AcceptsReturn="True"
-                                    TextWrapping="Wrap"
-                                    VerticalScrollBarVisibility="Auto"
-                                    KeyDown="txtDescricao_KeyDown" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Label Content="status" Margin="0,5,40,0" />
-                                <ComboBox x:Name="cmbStatus" Width="200" DisplayMemberPath="Nome"
-                                    SelectedValuePath="Id" KeyDown="cmbStatus_KeyDown" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Label Content="Dev" Margin="0,5,50,0" />
-                                <ComboBox x:Name="cmbDev" Width="200" DisplayMemberPath="Nome"
-                                    SelectedValuePath="Id" KeyDown="cmbDev_KeyDown" />
-                            </StackPanel>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal" Width="70"
-                                HorizontalAlignment="Left">
-                                <CheckBox x:Name="chkInativo" Content="Inativo" Margin="0,5,5,0"
-                                    IsChecked="False" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Label Content="Data Cadastro" Margin="0,5,20,0" />
-                                <DatePicker SelectedDateFormat="Short" x:Name="DateCadastro"
-                                    IsEnabled="False" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Label Content="Data Inicio" Margin="0,5,39,0" />
-                                <DatePicker SelectedDateFormat="Short"
-                                    SelectedDate="{x:Static System:DateTime.Now}"
-                                    x:Name="DateInicio"
-                                    KeyDown="DateInicio_KeyDown"
-                                    Loaded="DateInicio_Loaded"
-                                />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Label Content="Data Prevista" Margin="0,5,27,0" />
-                                <DatePicker SelectedDateFormat="Short"
-                                    x:Name="DatePrevisto"
-                                    KeyDown="DatePrevisto_KeyDown"
-                                    Loaded="DatePrevisto_Loaded" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                <Label Content="Data Fim" Margin="0,5,50,0" />
-                                <DatePicker SelectedDateFormat="Short"
-                                    x:Name="DateFim"
-                                    KeyDown="DateFim_KeyDown"
-                                    Loaded="DateFim_Loaded" />
-                            </StackPanel>
-
-                        </StackPanel>
-
-                    </StackPanel>
-                </DockPanel>
             </Grid>
         </TabItem>
-        <TabItem Header="Etapas" x:Name="tbEtapas" Loaded="tbEtapas_Loaded">
-            <Grid Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
-                        Margin="0,0,0,10">
-                        <Button Content="Adicionar" Width="100" Margin="0,0,10,0"
-                            Command="{Binding AdicionarEtapaCommand}" />
-                        <Button Content="Alterar" Width="100" Margin="0,0,10,0"
-                            Command="{Binding AlterarEtapaCommand}" />
-                        <Button Content="Remover" Width="100" Margin="0,0,10,0"
-                            Command="{Binding RemoverEtapaCommand}" />
-                    </StackPanel>
-                    <StackPanel>
-                        <StackPanel Margin="0,0,10,0"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left">
-                            <Button Content="Consultar" Width="100" Margin="0,0,10,0"
-                                Command="{Binding ConsultarEtapaCommand}" />
-                            <Label Content="Descrição:" />
-                            <TextBox Margin="10,0,10,0" Width="250"
-                                Text="{Binding FiltroDescricaoEtapa, UpdateSourceTrigger=PropertyChanged}"
-                                x:Name="txtDescricaoEtapa" />
+        <TabItem Header="Etapas" x:Name="tbEtapas">
+            <Grid Margin="10" Background="#F5F5F5">
 
-                        </StackPanel>
-                        <StackPanel Margin="0,0,10,0" Orientation="Vertical"
-                            VerticalAlignment="Center" HorizontalAlignment="Right">
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox Content="Inativo"
-                                    IsChecked="{Binding MostrarInativoEtapa}"
-                                    x:Name="chkInativoEtapa" Margin="0,5,5,0"
-                                    Click="chkInativoEtapa_Click" />
-                            </StackPanel>
-                        </StackPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- AÇÕES -->
+                <Border Background="White" Padding="10" CornerRadius="5" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Adicionar" Style="{StaticResource BtnSucesso}" Command="{Binding AdicionarEtapaCommand}"/>
+                        <Button Content="Alterar" Style="{StaticResource BtnPadrao}" Command="{Binding AlterarEtapaCommand}"/>
+                        <Button Content="Remover" Style="{StaticResource BtnPerigo}" Command="{Binding RemoverEtapaCommand}"/>
                     </StackPanel>
-                </StackPanel>
-                <DataGrid Grid.Row="1" IsReadOnly="False" Width="600" x:Name="dgEtapa"
-                    ItemsSource="{Binding ListaEtapas}" SelectedItem="{Binding EtapaSelecionada}"
-                    AutoGenerateColumns="False" CanUserAddRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="150"
-                            IsReadOnly="True" />
-                        <DataGridTextColumn Header="Titulo" Binding="{Binding Descricao}"
-                            Width="200" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Data Prevista"
-                            Binding="{Binding DataFimPrevisto}" Width="120" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Tempo Restante"
-                            Binding="{Binding TempoRestante}" Width="120" IsReadOnly="True" />
-                    </DataGrid.Columns>
-                </DataGrid>
+                </Border>
+
+                <!-- FILTRO -->
+                <Border Grid.Row="1" Background="White" Padding="10" CornerRadius="5" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <Button Content="Consultar"
+                        Style="{StaticResource BtnPadrao}"
+                        Command="{Binding ConsultarEtapaCommand}"/>
+
+                        <TextBox Width="250"
+                         Margin="10,0"
+                         Text="{Binding FiltroDescricaoEtapa}"/>
+
+                        <CheckBox Content="Inativo"
+                          IsChecked="{Binding MostrarInativoEtapa}"
+                          Margin="10,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- GRID -->
+                <Border Grid.Row="2" Background="White" CornerRadius="5" Padding="5">
+                    <DataGrid ItemsSource="{Binding ListaEtapas}"
+                      SelectedItem="{Binding EtapaSelecionada}"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="150"/>
+                            <DataGridTextColumn Header="Descrição" Binding="{Binding Descricao}" Width="200"/>
+                            <DataGridTextColumn Header="Data Prevista" Binding="{Binding DataFimPrevisto}" Width="120"/>
+                            <DataGridTextColumn Header="Tempo Restante" Binding="{Binding TempoRestante}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
             </Grid>
         </TabItem>
     </TabControl>

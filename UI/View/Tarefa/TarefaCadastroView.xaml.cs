@@ -164,7 +164,7 @@ namespace UI.View
             cmbStatus.SelectedValue = enStatusTarefa.Pendente;
             cmbDev.SelectedValue = 0;
             chkInativo.IsChecked = false;
-            DateCadastro.Text = DateTime.Now.ToShortDateString();
+            //DateCadastro.Text = DateTime.Now.ToShortDateString();
             txtTitulo.Focus();
 
         }
@@ -174,13 +174,13 @@ namespace UI.View
         }
         private void CarregarDados()
         {
-            codigoGuid.Content = _tarefa.Id.ToString();
-            dataAtualizacao.Content = _tarefa.DataAtualizacao.ToString();
+            codigoGuid.Text = _tarefa.Id.ToString();
+            dataAtualizacao.Text = _tarefa.DataAtualizacao.ToString();
             txtTitulo.Text = _tarefa.Titulo;
             txtDescricao.Text = _tarefa.Descricao;
             cmbStatus.SelectedValue = _tarefa.StatusId;
             cmbDev.SelectedValue = _tarefa.DesenvolvedorId;
-            DateCadastro.SelectedDate = _tarefa.DataCriacao;
+            //DateCadastro.SelectedDate = _tarefa.DataCriacao;
             DateInicio.SelectedDate = _tarefa.DataInicio;
             DatePrevisto.SelectedDate = _tarefa.DataFimPrevisto;
             DateFim.SelectedDate = _tarefa.DataFimReal;
