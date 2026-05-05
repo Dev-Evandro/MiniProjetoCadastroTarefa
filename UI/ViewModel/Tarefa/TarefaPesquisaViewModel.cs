@@ -22,10 +22,11 @@ namespace UI.ViewModel.Tarefa
         private string _filtroTitulo;
         private readonly TarefaService _service;
         private bool _procurarInativo;
+        private readonly INavigationService _navigationService;
+
         public string TextoCheckBox => ProcurarInativo ? "Procurar Inativo" : "Procurar Ativo";
         public ObservableCollection<TAREFA> ListaTarefas { get; set; }
         = new ObservableCollection<TAREFA>();
-        public event Action<TAREFA, AcaoFormulario> AbrirCadastro;
         public TAREFA TarefaSelecionada
         {
             get => _tarefaSelecionada;
@@ -35,17 +36,24 @@ namespace UI.ViewModel.Tarefa
                 OnPropertyChanged();
             }
         }
-        public TarefaPesquisaViewModel()
+        public TarefaPesquisaViewModel(INavigationService navigationService)
         {
+            _navigationService = navigationService;
             _service = new TarefaService();
 
-            PesquisarCommand = new UI.ViewModel.RelayCommand.RelayCommand(Pesquisar);
-            IncluirCommand = new UI.ViewModel.RelayCommand.RelayCommand(Incluir);
-            AlterarCommand = new UI.ViewModel.RelayCommand.RelayCommand(Alterar, PodeAlterarExcluir);
-            ExcluirCommand = new UI.ViewModel.RelayCommand.RelayCommand(Excluir, PodeAlterarExcluir);
+            PesquisarCommand = new RelayCommand.RelayCommand(Pesquisar);
+            IncluirCommand = new RelayCommand.RelayCommand(Incluir);
+            AlterarCommand = new RelayCommand.RelayCommand(Alterar, PodeAlterarExcluir);
+            ExcluirCommand = new RelayCommand.RelayCommand(Excluir, PodeAlterarExcluir);
 
             CarregarTarefas();
+            
         }
+        public interface INavigationService
+        {
+            void AbrirTarefaCadastro(TAREFA tarefa, AcaoFormulario acao);
+        }
+
         public string FiltroTitulo
         {
             get => _filtroTitulo;
@@ -93,21 +101,25 @@ namespace UI.ViewModel.Tarefa
         }
         private void Incluir(object obj)
         {
-            AbrirCadastro?.Invoke(null, AcaoFormulario.Incluir);
+            _navigationService.AbrirTarefaCadastro(null, AcaoFormulario.Incluir);
         }
+
         private void Alterar(object obj)
         {
             if (TarefaSelecionada == null) return;
 
-            AbrirCadastro?.Invoke( TarefaSelecionada,AcaoFormulario.Alterar);
+            _navigationService.AbrirTarefaCadastro(
+                TarefaSelecionada, AcaoFormulario.Alterar);
         }
+
         private void Excluir(object obj)
         {
             if (TarefaSelecionada == null) return;
 
-            AbrirCadastro?.Invoke(
+            _navigationService.AbrirTarefaCadastro(
                 TarefaSelecionada, AcaoFormulario.Excluir);
         }
+        
         private bool PodeAlterarExcluir(object obj)
         {
             return TarefaSelecionada != null;

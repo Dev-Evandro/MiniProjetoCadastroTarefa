@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using UI.ViewModel.Tarefa;
 using Core.Enums;
+using UI.ViewModel.NavigationService;
 
 namespace UI.View.Tarefa
 {
@@ -25,8 +26,8 @@ namespace UI.View.Tarefa
         public TarefaPesquisaView()
         {
             InitializeComponent();
-            var vm = new TarefaPesquisaViewModel();
-            vm.AbrirCadastro += Vm_AbrirCadastro;
+            var navigation = new NavigationService();
+            var vm = new TarefaPesquisaViewModel(navigation);
             DataContext = vm;
         }
 

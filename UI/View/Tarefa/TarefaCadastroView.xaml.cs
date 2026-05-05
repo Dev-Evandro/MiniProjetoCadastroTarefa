@@ -52,6 +52,10 @@ namespace UI.View
         #region funcoes
         private bool ValidaDados()
         {
+            int? statusSelecionado = cmbStatus.SelectedValue != null
+                ? Convert.ToInt32(cmbStatus.SelectedValue)
+                : (int?)null;
+
             if (txtTitulo.Text == "")
             {
                 txtTitulo.Focus();
@@ -65,7 +69,7 @@ namespace UI.View
             }
             if (cmbDev.SelectedValue == null)
             {
-                cmbStatus.Focus();
+                cmbDev.Focus();
                 return false;
             }
             if (cmbStatus.SelectedValue == null)
@@ -73,13 +77,19 @@ namespace UI.View
                 cmbStatus.Focus();
                 return false;
             }
-            if (!DateFim.SelectedDate.HasValue
-                || !DateInicio.SelectedDate.HasValue
-                || !DatePrevisto.SelectedDate.HasValue)
+            if (!DateInicio.SelectedDate.HasValue || !DatePrevisto.SelectedDate.HasValue)
             {
                 return false;
             }
+            if (statusSelecionado == (int)enStatusTarefa.Concluida && !DateFim.SelectedDate.HasValue)
+            {
+                MessageBox.Show("Status como concluído deve ter uma Data FIM",
+                    "Atenção!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
 
+                return false;
+            }
 
             return true;
         }
@@ -180,7 +190,7 @@ namespace UI.View
             txtDescricao.Text = _tarefa.Descricao;
             cmbStatus.SelectedValue = _tarefa.StatusId;
             cmbDev.SelectedValue = _tarefa.DesenvolvedorId;
-            //DateCadastro.SelectedDate = _tarefa.DataCriacao;
+            dataCadastro.Text = _tarefa.DataCriacao.ToString();
             DateInicio.SelectedDate = _tarefa.DataInicio;
             DatePrevisto.SelectedDate = _tarefa.DataFimPrevisto;
             DateFim.SelectedDate = _tarefa.DataFimReal;

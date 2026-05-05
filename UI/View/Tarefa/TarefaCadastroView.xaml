@@ -8,7 +8,7 @@
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:local="clr-namespace:UI.View"
     mc:Ignorable="d"
-    Title="TarefaCadastroView" Height="600" Width="900" Loaded="TarefaCadastro_Loaded">
+    Title="TarefaCadastroView" Height="640" Width="900" Loaded="TarefaCadastro_Loaded">
     <TabControl Margin="0,10,0,0" SelectedIndex="{Binding AbaSelecionada}">
         <TabItem Header="Cadastro">
             <Grid Background="#F5F5F5" Margin="10">
@@ -106,10 +106,35 @@
 
                 <!-- 🔵 RODAPÉ -->
                 <Border Grid.Row="2" Background="White" Padding="10" CornerRadius="5" Margin="0,10,0,0">
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="Código: ..." x:Name="codigoGuid" Margin="0,0,20,0"/>
-                        <TextBlock Text="Atualização: ..." x:Name="dataAtualizacao"/>
-                    </StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Margin="0,5,0,0">
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Text="Código:" Margin="0,0,5,0"/>
+                                <TextBlock Text="Guid" x:Name="codigoGuid" Margin="0,0,5,0"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Margin="0,5,0,0">
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Text="Data Cadastro: "  Margin="0,0,5,0"/>
+                                <TextBlock Text="Cadastro" x:Name="dataCadastro"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Margin="0,5,0,0">
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Text="Data Atualizacao: "  Margin="0,0,5,0"/>
+                                <TextBlock Text="Atualização" x:Name="dataAtualizacao"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Grid>
+
                 </Border>
 
             </Grid>

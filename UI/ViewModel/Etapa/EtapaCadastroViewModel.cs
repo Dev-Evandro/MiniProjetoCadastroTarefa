@@ -34,8 +34,8 @@ namespace UI.ViewModel.Etapa
                 Inativo = false
             };
 
-            SalvarCommand = new UI.ViewModel.RelayCommand.RelayCommand(async _ => await Salvar());
-            CancelarCommand = new UI.ViewModel.RelayCommand.RelayCommand(_ => FecharTela?.Invoke());
+            SalvarCommand = new RelayCommand.RelayCommand(async _ => await Salvar());
+            CancelarCommand = new RelayCommand.RelayCommand(_ => FecharTela?.Invoke());
         }
 
         private async Task Salvar()

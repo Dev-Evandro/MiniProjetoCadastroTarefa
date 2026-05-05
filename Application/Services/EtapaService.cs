@@ -53,6 +53,8 @@ namespace Application.Services
 
         private void ValidarEtapa(ETAPA etapa)
         {
+
+
             if (etapa.TarefaId == Guid.Empty)
                 throw new Exception("Tarefa não informada.");
 
