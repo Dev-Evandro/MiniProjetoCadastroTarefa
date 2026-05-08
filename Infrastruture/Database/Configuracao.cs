@@ -15,7 +15,8 @@ namespace Infrastruture.Database
         public static string NomeBanco { get; private set; }
         public static string StringConexao { get; private set; }
 
-        private static readonly string caminhoArquivo = @"C:\PDVFinanceiro\Config\config.xml";
+        private static readonly string caminhoArquivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PDVFinanceiro\\Config\\config.xml");
+
         public static void CriarArquivoPadrao()
         {
             try

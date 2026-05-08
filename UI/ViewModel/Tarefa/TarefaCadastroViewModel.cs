@@ -16,6 +16,8 @@ namespace UI.ViewModel.Tarefa
 {
     public class TarefaCadastroViewModel : ViewModelBase
     {
+
+        #region EtapaView
         private readonly EtapaService _etapaService;
         public TAREFA Tarefa { get; set; }
         public ObservableCollection<ETAPA> ListaEtapas { get; set; }
@@ -29,7 +31,6 @@ namespace UI.ViewModel.Tarefa
                 OnPropertyChanged();
             }
         }
-
         private int _abaSelecionada;
         public int AabaSelecionada
         {
@@ -56,7 +57,6 @@ namespace UI.ViewModel.Tarefa
                 _ = CarregarEtapas();
             }
         }
-
         private bool _mostrarInativoEtapa;
         public bool MostrarInativoEtapa
         {
@@ -67,12 +67,10 @@ namespace UI.ViewModel.Tarefa
                 OnPropertyChanged();
             }
         }
-
         public ICommand ConsultarEtapaCommand { get; }
         public ICommand AdicionarEtapaCommand { get; }
         public ICommand AlterarEtapaCommand { get; }
         public ICommand RemoverEtapaCommand { get; }
-
         public TarefaCadastroViewModel(TAREFA tarefa)
         {
             _etapaService = new EtapaService();
@@ -108,7 +106,6 @@ namespace UI.ViewModel.Tarefa
 
             await CarregarEtapas();
         }
-
         private void AlterarEtapa(object? obj)
         {
             if (EtapaSelecionada == null)
@@ -119,7 +116,6 @@ namespace UI.ViewModel.Tarefa
 
             _ = CarregarEtapas();
         }
-
         private async void RemoverEtapa(object? obj)
         {
             if (EtapaSelecionada == null)
@@ -131,5 +127,6 @@ namespace UI.ViewModel.Tarefa
 
             await CarregarEtapas();
         }
+        #endregion
     }
 }
