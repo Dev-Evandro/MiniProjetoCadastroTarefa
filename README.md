@@ -1,146 +1,134 @@
-# MiniProjetoCadastroTarefa
-# 📌 Mini Projeto - Cadastro de Tarefas
+MiniProjetoCadastroTarefa
+📌 Sobre o Projeto
 
-## 📖 Sobre o Projeto
+O MiniProjetoCadastroTarefa é um sistema desktop desenvolvido em C# com WPF, com foco no gerenciamento de tarefas e etapas.
 
-Este projeto tem como objetivo o controle de tarefas e suas etapas, permitindo organizar atividades de forma simples e estruturada.
+O projeto surgiu como estudo e evolução técnica, aplicando conceitos modernos de desenvolvimento como:
 
-Atualmente o sistema já permite:
+Arquitetura em camadas
+MVVM
+Separação de responsabilidades
+Organização por projetos
+Boas práticas de estruturação
+🚀 Funcionalidades Atuais
+📝 Cadastro de Tarefas
 
-* ✅ Cadastrar tarefas
-* ✅ Editar tarefas
-* ✅ Inativar (excluir logicamente) tarefas
-* ✅ Consultar tarefas (ativas ou inativas)
-* ✅ Cadastrar etapas dentro de uma tarefa
-* ✅ Editar e inativar etapas
+O sistema permite:
 
----
+✅ Cadastrar tarefas
+✅ Editar tarefas
+✅ Inativar tarefas (exclusão lógica)
+✅ Consultar tarefas ativas e inativas
+✅ Filtrar tarefas por título
+✅ Controle de status
+✅ Controle de desenvolvedor responsável
+✅ Controle de datas:
+Início
+Previsão
+Finalização
+🔹 Cadastro de Etapas
 
-## 🧩 Funcionalidades atuais
+Cada tarefa pode possuir várias etapas vinculadas.
 
-### 📝 Tarefas
+Funcionalidades:
 
-* Cadastro de tarefas com:
+✅ Cadastro de etapas
+✅ Edição de etapas
+✅ Inativação lógica
+✅ Controle de datas
+✅ Cálculo automático de tempo restante
+🏗️ Arquitetura do Projeto
 
-  * Título
-  * Descrição
-  * Datas (início, prevista, fim)
-  * Status
-  * Desenvolvedor
-* Listagem com filtro por título
-* Filtro por ativo/inativo
-* Edição e inativação (exclusão lógica)
+O sistema foi reorganizado utilizando arquitetura em camadas, visando:
 
----
+Melhor organização
+Separação de responsabilidades
+Facilidade de manutenção
+Reaproveitamento de código
+Evolução futura do sistema
+📂 Estrutura da Solution
+Projeto	Responsabilidade
+UI	Interface gráfica WPF (Views, ViewModels, Commands)
+Core	Models, enums e contratos da aplicação
+Application	Regras de negócio e Services
+Infrastructure	Acesso a dados e configurações
+🔄 Fluxo da Aplicação
+UI → Application → Infrastructure
+        ↓
+      Core
+🎨 Interface
 
-### 🔹 Etapas
+O sistema utiliza:
 
-* Cada tarefa pode conter várias etapas
-* Cadastro de etapas com:
+WPF
+MVVM parcial
+Estilização customizada
+Separação visual por telas
+Componentização de comandos
+⚙️ Configuração do Sistema
 
-  * Título
-  * Descrição
-  * Datas
-  * Ordem
-* Cálculo automático de **tempo restante**
-* Inativação de etapas
+O sistema carrega automaticamente o arquivo de configuração localizado em:
 
----
+PDVFinanceiro\Config\config.xml
 
-## 🚀 Próximas evoluções
+O caminho é baseado automaticamente no diretório da aplicação utilizando:
 
-O projeto ainda está em desenvolvimento. Algumas melhorias planejadas:
-
-* 📊 Dashboard com:
-
-  * Tempo médio por tarefa
-  * Quantidade de tarefas concluídas
-  * Acompanhamento de produtividade
-* 🧑‍💻 Cadastro de Desenvolvedores (atualmente fixo em classe)
-* 📌 Cadastro de Status (atualmente fixo em classe)
-* 🔄 Melhorias na arquitetura com MVVM completo
-
----
-
-## ⚙️ Configuração do Sistema
-
-O sistema busca automaticamente a configuração do banco de dados no seguinte diretório:
-
-```
-C:\PDVFinanceiro\Config
-```
-
-### 📄 Arquivo de configuração
-
-O arquivo deve conter a seguinte estrutura:
-
-```xml
+AppDomain.CurrentDomain.BaseDirectory
+📄 Estrutura do arquivo config.xml
 <configuracao>
-    <nomeInstancia>dev-evandro\pdvnet</nomeInstancia>
+    <nomeInstancia>SERVIDOR\SQL</nomeInstancia>
     <nomeUsuario>sa</nomeUsuario>
     <nomeSenha>senha</nomeSenha>
-    <nomeBanco>EvandroEdgariano</nomeBanco>
+    <nomeBanco>MiniProjeto</nomeBanco>
 </configuracao>
-```
+🗄️ Banco de Dados
+🔧 SGBD Utilizado
+SQL Server
+📊 Estrutura Atual
+TAREFA
 
----
+Responsável pelo armazenamento das tarefas principais.
 
-## 🗄️ Banco de Dados
+ETAPA
 
-### 🔧 SGBD utilizado
+Responsável pelo armazenamento das etapas vinculadas às tarefas.
 
-* SQL Server
+🔮 Evoluções Futuras
 
-### 📊 Estrutura atual
+Planejamentos futuros do sistema:
 
-#### Tabela: TAREFA
+📊 Dashboard administrativo
+📈 Indicadores financeiros e produtividade
+👨‍💻 Cadastro de desenvolvedores
+📌 Cadastro de status
+🔐 Controle de usuários e permissões
+📋 Melhorias completas em MVVM
+💉 Injeção de dependência (Dependency Injection)
+🧪 Testes unitários
+💾 Backup do Banco
 
-Responsável por armazenar as tarefas principais do sistema.
-
-#### Tabela: ETAPA
-
-Responsável por armazenar as etapas vinculadas a uma tarefa.
-
----
-
-### 🔮 Estrutura futura
-
-As seguintes entidades ainda serão persistidas no banco:
-
-* Desenvolvedor
-* Status
-* (Possível evolução de Etapas com mais detalhes)
-
-Atualmente essas informações estão sendo controladas via classes no sistema.
-
----
-
-## 💾 Backup do Banco
-
-Você pode baixar o backup do banco de dados no link abaixo:
+Backup disponível em:
 
 👉 https://1drv.ms/u/c/4434e7202289c105/IQBVf7kymw5-TI9lygiYeCaCAeQq4Y_3J-Q0Nw0QL7DfGvg?e=wk9ktV
 
----
+📚 Objetivo do Projeto
 
-## 📚 Outros Projetos
+Este projeto tem como foco:
 
-Este repositório também contém outros projetos desenvolvidos durante estudos, principalmente relacionados a:
+Evolução técnica
+Aprendizado de arquitetura moderna
+Migração de conceitos legados para padrões atuais
+Aplicação prática de WPF + MVVM
+👨‍💻 Autor
 
-* LINQ
-* Manipulação de dados
-* Exercícios práticos
+Desenvolvido por Evandro Edgariano
+Analista de Sistemas / Desenvolvedor
 
----
+# 🏗️ Arquitetura da Solução
 
-## 🧠 Observações
+<p align="center">
+ <img src="docs/images/camadasProjeto.png" width="700"/>
+</p>
 
-* O projeto está em evolução contínua
-* Parte da arquitetura já está migrando para o padrão **MVVM**
-* O objetivo também é evolução profissional e adaptação a práticas de mercado modernas
-
----
-
-## 👨‍💻 Autor
-
-Projeto desenvolvido por Evandro, com foco em evolução técnica e transição de tecnologias legadas para padrões atuais.
+O sistema foi dividido em camadas visando melhor manutenção,
+organização e reaproveitamento de código.
