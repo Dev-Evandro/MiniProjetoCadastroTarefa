@@ -41,6 +41,11 @@ namespace Application.Services
         {
             return await _dal.ConsultarTarefaAsync(guid, inativo);
         }
+        public async Task<TAREFA?> ConsultarCompletoAsync(Guid id, bool inativo = false)
+        {
+            return await _dal.ConsultarCompletoAsync(id, inativo);
+        }
+
         public async Task AlterarStatusAsync(Guid id, bool inativo)
         {
             await _dal.AlterarStatusAsync(id, inativo);

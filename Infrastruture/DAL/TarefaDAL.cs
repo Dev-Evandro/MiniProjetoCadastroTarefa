@@ -87,6 +87,53 @@ namespace Infrastruture.DAL
 
             await connection.ExecuteAsync(sql, tarefa);
         }
+        public async Task<TAREFA?> ConsultarCompletoAsync(Guid id, bool inativo = false)
+        {
+            using var connection = new SqlConnection(_connectionString);
+
+            string sql = @"
+        SELECT
+            T.*,
+            E.*
+        FROM TAREFA T
+        LEFT JOIN ETAPA E
+            ON E.TarefaId = T.Id
+        WHERE T.Id = @Id
+        AND T.Inativo = @Inativo";
+
+            var tarefaDictionary = new Dictionary<Guid, TAREFA>();
+
+            var resultado = await connection.QueryAsync<TAREFA, ETAPA, TAREFA>(
+                sql,
+                (tarefa, etapa) =>
+                {
+                    if (!tarefaDictionary.TryGetValue(tarefa.Id, out var tarefaAtual))
+                    {
+                        tarefaAtual = tarefa;
+                        tarefaAtual.Etapas = new List<ETAPA>();
+
+                        tarefaDictionary.Add(tarefaAtual.Id, tarefaAtual);
+                    }
+
+                    if (etapa != null)
+                    {
+                        tarefaAtual.Etapas.Add(etapa);
+                    }
+
+                    return tarefaAtual;
+                },
+                new
+                {
+                    Id = id,
+                    Inativo = inativo
+                },
+                splitOn: "Id"
+            );
+
+            return tarefaDictionary.Values.FirstOrDefault();
+        }
+
+
         public async Task<TAREFA?> ConsultarTarefaAsync(Guid id, bool inativo = false)
         {
             using var connection = new SqlConnection(_connectionString);
