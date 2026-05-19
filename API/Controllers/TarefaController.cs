@@ -1,5 +1,4 @@
-﻿using API.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Application.Services;
 
 namespace API.Controllers
@@ -47,5 +46,7 @@ namespace API.Controllers
 
             return Ok(tarefa);
         }
+
+
     }
 }
