@@ -29,14 +29,12 @@ namespace UI.View
         private readonly TarefaService _service;
         private readonly AcaoFormulario _acao;
         private TAREFA _tarefa;
-        private readonly EtapaService _etapaService;
-        private ETAPA _etapa;
+        //private readonly EtapaService _etapaService;
+        //private ETAPA? _etapa;
         #endregion
 
         #region Construtor
-        public TarefaCadastroView(
-        AcaoFormulario acao,
-        TAREFA? tarefaSelecionada = null)
+        public TarefaCadastroView(AcaoFormulario acao,TAREFA? tarefaSelecionada)
         {
             InitializeComponent();
 
@@ -310,8 +308,8 @@ namespace UI.View
             }
 
 
-            if (_acao == AcaoFormulario.Excluir)
-                AlterarStatusTarefa();
+            //if (_acao == AcaoFormulario.Excluir)
+                //AlterarStatusTarefa();
         }
     }
 }

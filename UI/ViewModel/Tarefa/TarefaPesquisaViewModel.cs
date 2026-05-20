@@ -18,8 +18,8 @@ namespace UI.ViewModel.Tarefa
 {
     public class TarefaPesquisaViewModel : INotifyPropertyChanged
     {
-        private TAREFA _tarefaSelecionada;
-        private string _filtroTitulo;
+        private TAREFA? _tarefaSelecionada;
+        private string? _filtroTitulo;
         private readonly TarefaService _service;
         private bool _procurarInativo;
         private readonly INavigationService _navigationService;
@@ -27,9 +27,9 @@ namespace UI.ViewModel.Tarefa
         public string TextoCheckBox => ProcurarInativo ? "Procurar Inativo" : "Procurar Ativo";
         public ObservableCollection<TAREFA> ListaTarefas { get; set; }
         = new ObservableCollection<TAREFA>();
-        public TAREFA TarefaSelecionada
+        public TAREFA? TarefaSelecionada
         {
-            get => _tarefaSelecionada;
+            get => _tarefaSelecionada; 
             set
             {
                 _tarefaSelecionada = value;
@@ -41,7 +41,7 @@ namespace UI.ViewModel.Tarefa
             _navigationService = navigationService;
             _service = new TarefaService();
 
-            PesquisarCommand = new RelayCommand.RelayCommand(Pesquisar);
+            PesquisarCommand = new RelayCommand.RelayCommand(async _ => await Pesquisar());
             IncluirCommand = new RelayCommand.RelayCommand(Incluir);
             AlterarCommand = new RelayCommand.RelayCommand(Alterar, PodeAlterarExcluir);
             ExcluirCommand = new RelayCommand.RelayCommand(Excluir, PodeAlterarExcluir);
@@ -51,10 +51,10 @@ namespace UI.ViewModel.Tarefa
         }
         public interface INavigationService
         {
-            void AbrirTarefaCadastro(TAREFA tarefa, AcaoFormulario acao);
+            void AbrirTarefaCadastro(TAREFA? tarefa, AcaoFormulario acao);
         }
 
-        public string FiltroTitulo
+        public string? FiltroTitulo
         {
             get => _filtroTitulo;
             set
@@ -75,14 +75,14 @@ namespace UI.ViewModel.Tarefa
                 _procurarInativo = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(TextoCheckBox));
-                Pesquisar(null);
+                _ = Pesquisar();
             }
         }
         private void CarregarTarefas()
         {
 
         }
-        private async void Pesquisar(object obj)
+        private async Task Pesquisar()
         {
             try
             {
@@ -97,7 +97,6 @@ namespace UI.ViewModel.Tarefa
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
         private void Incluir(object obj)
         {
@@ -124,8 +123,8 @@ namespace UI.ViewModel.Tarefa
         {
             return TarefaSelecionada != null;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

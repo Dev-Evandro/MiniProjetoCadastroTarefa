@@ -4,24 +4,16 @@
              xmlns:local="clr-namespace:UI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- Botão padrão -->
-        <Style x:Key="BtnPadrao" TargetType="Button">
-            <Setter Property="Background" Value="#1976D2"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-        </Style>
 
-        <!-- Botão sucesso -->
-        <Style x:Key="BtnSucesso" TargetType="Button" BasedOn="{StaticResource BtnPadrao}">
-            <Setter Property="Background" Value="#2E7D32"/>
-        </Style>
+        <ResourceDictionary>
 
-        <!-- Botão perigo -->
-        <Style x:Key="BtnPerigo" TargetType="Button" BasedOn="{StaticResource BtnPadrao}">
-            <Setter Property="Background" Value="#C62828"/>
-        </Style>
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="Framework/Styles/ButtonStyles.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

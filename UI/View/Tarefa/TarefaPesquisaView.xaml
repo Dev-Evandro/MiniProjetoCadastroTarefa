@@ -38,22 +38,22 @@
 
                     <Button Content="Pesquisar"
                             Command="{Binding PesquisarCommand}"
-                            Style="{StaticResource BtnPadrao}"
+                            Style="{StaticResource PrimaryButton}"
                             Margin="5,0"/>
 
                     <Button Content="Incluir"
                             Command="{Binding IncluirCommand}"
-                            Style="{StaticResource BtnSucesso}"
+                            Style="{StaticResource SuccessButton}"
                             Margin="5,0"/>
 
                     <Button Content="Alterar"
                             Command="{Binding AlterarCommand}"
-                            Style="{StaticResource BtnPadrao}"
+                            Style="{StaticResource PrimaryButton}"
                             Margin="5,0"/>
 
                     <Button Content="Excluir"
                             Command="{Binding ExcluirCommand}"
-                            Style="{StaticResource BtnPerigo}"
+                            Style="{StaticResource DangerButton}"
                             Margin="5,0"/>
                 </StackPanel>
             </Grid>
@@ -102,7 +102,7 @@
                     Width="100"
                     Height="35"
                     Click="cmdSair_Click"
-                    Style="{StaticResource BtnPadrao}"/>
+                    Style="{StaticResource DangerButton}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -20,12 +20,12 @@
                 <Button Content="Salvar"
                         Width="100"
                         Command="{Binding SalvarCommand}"
-                        Style="{StaticResource BtnSucesso}"/>
+                        Style="{StaticResource PrimaryButton}"/>
 
                 <Button Content="Cancelar"
                         Width="100"
                         Command="{Binding CancelarCommand}"
-                        Style="{StaticResource BtnPerigo}"/>
+                        Style="{StaticResource DangerButton}"/>
             </StackPanel>
         </Border>
 

@@ -12,7 +12,7 @@ namespace UI.ViewModel.NavigationService
 {
     public class NavigationService : INavigationService
     {
-        public void AbrirTarefaCadastro(TAREFA tarefa, AcaoFormulario acao)
+        public void AbrirTarefaCadastro(TAREFA? tarefa, AcaoFormulario acao)
         {
             var frm = new TarefaCadastroView(acao, tarefa);
             frm.ShowDialog();

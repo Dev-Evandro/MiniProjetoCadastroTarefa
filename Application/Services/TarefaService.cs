@@ -28,7 +28,7 @@ namespace Application.Services
             return tarefa.Id;
         }
 
-        public async Task<IEnumerable<TAREFA>> ListarAsync(string filtroTitulo, bool procurarInativo)
+        public async Task<IEnumerable<TAREFA>> ListarAsync(string? filtroTitulo, bool procurarInativo)
         {
             return await _dal.ListarAsync(filtroTitulo, procurarInativo);
         }
