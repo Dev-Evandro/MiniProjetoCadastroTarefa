@@ -19,6 +19,20 @@ namespace Core.Models
         public bool Inativo { get; set; }
         public virtual TAREFA? Tarefa { get; set; }
 
+        public string status
+        {
+            get
+            {
+                if (DataFimReal != null)
+                    return "Concluido";
+
+                if (DataFimPrevisto < DateTime.Now)
+                    return "Atrasado";
+
+                return "Pendente";
+            }
+        }
+
         public string TempoRestante
         {
             get

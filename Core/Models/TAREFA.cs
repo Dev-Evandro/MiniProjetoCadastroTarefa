@@ -29,8 +29,27 @@ namespace Core.Models
         public DateTime? DataAtualizacao { get; set; }
 
         // 🔗 Relacionamentos
-        public virtual STATUS? Status { get; set; }
+        public string Status
+        {
+            get
+            {
+                var status = STATUSHELPER.ObterStatus().FirstOrDefault(x => x.Id == StatusId);
 
+                return status?.Nome ?? "";
+            }
+        }
+        public string NomeDesenvolvedor
+        {
+            get 
+            {
+
+                var desenvolvedor = LISTADESENVOLVEDOR
+                    .ObterDesenvolvedor()
+                    .FirstOrDefault(x => x.Id == DesenvolvedorId);
+
+                return desenvolvedor?.Nome ?? "";
+            }
+        }
         public virtual ICollection<ETAPA> Etapas { get; set; }
             = new List<ETAPA>();
     }

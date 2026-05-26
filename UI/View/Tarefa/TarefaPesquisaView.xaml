@@ -61,7 +61,8 @@
 
         <!-- 📋 LISTA -->
         <Border Grid.Row="1" Background="White" CornerRadius="5" Padding="5">
-            <ListView ItemsSource="{Binding ListaTarefas}"
+            <ListView Style="{StaticResource DefaultListViewStyle}" 
+                      ItemsSource="{Binding ListaTarefas}"
                       SelectedItem="{Binding TarefaSelecionada}"
                       MouseDoubleClick="ListView_MouseDoubleClick">
 
@@ -71,10 +72,10 @@
                             DisplayMemberBinding="{Binding Titulo}" />
 
                         <GridViewColumn Header="Desenvolvedor" Width="120"
-                            DisplayMemberBinding="{Binding Desenvolvedor}" />
+                            DisplayMemberBinding="{Binding NomeDesenvolvedor}" />
 
                         <GridViewColumn Header="Status" Width="120"
-                            DisplayMemberBinding="{Binding Status.Nome}" />
+                            DisplayMemberBinding="{Binding Status}" />
 
                         <GridViewColumn Header="Início" Width="100">
                             <GridViewColumn.DisplayMemberBinding>
