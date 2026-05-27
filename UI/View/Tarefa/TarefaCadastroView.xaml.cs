@@ -79,7 +79,7 @@ namespace UI.View
             {
                 return false;
             }
-            if (statusSelecionado == (int)enStatusTarefa.Concluida && !DateFim.SelectedDate.HasValue)
+            if (statusSelecionado == (int)StatusTarefa.Concluida && !DateFim.SelectedDate.HasValue)
             {
                 MessageBox.Show("Status como concluído deve ter uma Data FIM",
                     "Atenção!",
@@ -169,7 +169,7 @@ namespace UI.View
         {
             txtTitulo.Text = "";
             txtDescricao.Text = "";
-            cmbStatus.SelectedValue = enStatusTarefa.Pendente;
+            cmbStatus.SelectedValue = StatusTarefa.Pendente;
             cmbDev.SelectedValue = 0;
             chkInativo.IsChecked = false;
             //DateCadastro.Text = DateTime.Now.ToShortDateString();

@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core.DTOs.Dashboard;
+using Core.Models;
 using Dapper;
 using Infrastruture.Database;
 using Microsoft.Data.SqlClient;
@@ -200,6 +201,44 @@ namespace Infrastruture.DAL
 
             await connection.ExecuteAsync(sql, tarefa);
         }
+
+        public async Task<DashboardDTO> ObterDashboardAsync()
+        {
+            using var connection = new SqlConnection(_connectionString);
+
+            var sql = @"SELECT
+                            COUNT(*) AS TotalTarefas,
+
+                            SUM(
+                                CASE
+                                    WHEN StatusId = 3 THEN 1
+                                    ELSE 0
+                                END
+                            ) AS Concluidas,
+
+                            SUM(
+                                CASE
+                                    WHEN StatusId = 1 THEN 1
+                                    ELSE 0
+                                END
+                            ) AS Pendentes,
+
+                            SUM(
+                                CASE
+                                    WHEN DataFimPrevisto < GETDATE()
+                                            AND StatusId <> 3
+                                    THEN 1
+                                    ELSE 0
+                                END
+                            ) AS Atrasadas
+
+                            FROM TAREFA";
+
+            return await connection.QueryFirstOrDefaultAsync<DashboardDTO>(sql) 
+                ?? new DashboardDTO();
+
+        }
+
 
 
 

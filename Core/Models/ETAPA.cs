@@ -18,13 +18,12 @@ namespace Core.Models
         public int Ordem { get; set; }
         public bool Inativo { get; set; }
         public virtual TAREFA? Tarefa { get; set; }
-
-        public string status
+        public string Status
         {
             get
             {
                 if (DataFimReal != null)
-                    return "Concluido";
+                    return "Concluído";
 
                 if (DataFimPrevisto < DateTime.Now)
                     return "Atrasado";
@@ -32,7 +31,6 @@ namespace Core.Models
                 return "Pendente";
             }
         }
-
         public string TempoRestante
         {
             get

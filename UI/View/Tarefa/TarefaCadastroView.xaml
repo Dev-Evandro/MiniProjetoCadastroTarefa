@@ -242,6 +242,7 @@
                 <Border Grid.Row="2"  Padding="5"  Background="White"  CornerRadius="5">
                     <DataGrid AutoGenerateColumns="False" 
                               CanUserAddRows="False"
+                              IsReadOnly="True"
                               ItemsSource="{Binding ListaEtapas}" 
                               SelectedItem="{Binding EtapaSelecionada}" 
                               Style="{StaticResource DefaultDataGridStyle}">
