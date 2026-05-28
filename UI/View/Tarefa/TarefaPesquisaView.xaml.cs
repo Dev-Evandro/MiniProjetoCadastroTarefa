@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using UI.ViewModel.Tarefa;
 using Core.Enums;
 using UI.ViewModel.NavigationService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace UI.View.Tarefa
 {
@@ -23,19 +24,18 @@ namespace UI.View.Tarefa
     /// </summary>
     public partial class TarefaPesquisaView : Window
     {
-        public TarefaPesquisaView()
+        public TarefaPesquisaView(TarefaPesquisaViewModel vm)
         {
             InitializeComponent();
-            var navigation = new NavigationService();
-            var vm = new TarefaPesquisaViewModel(navigation);
+
             DataContext = vm;
         }
 
-        private void Vm_AbrirCadastro(
-            TAREFA tarefa,
-            AcaoFormulario acao)
+        private void Vm_AbrirCadastro(TAREFA tarefa,AcaoFormulario acao)
         {
-            var frm = new TarefaCadastroView(acao, tarefa);
+            var frm = App.Services.GetRequiredService<TarefaCadastroView>();
+
+            frm.Configurar(acao, tarefa);
             frm.ShowDialog();
         }
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

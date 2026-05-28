@@ -1,4 +1,5 @@
 ﻿using Application.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UI.View.Tarefa;
+using UI.ViewModel.Tarefa;
 
 namespace UI
 {
@@ -38,11 +40,11 @@ namespace UI
                 System.Windows.Application.Current.Shutdown();
             }
         }
-
         private void AbrirTarefas_Click(object sender, RoutedEventArgs e)
         {
-            TarefaPesquisaView f = new TarefaPesquisaView();
-            f.Show();
+            var f = App.Services?.GetRequiredService<TarefaPesquisaView>();
+
+            f?.Show();
             this.Close();
         }
     }

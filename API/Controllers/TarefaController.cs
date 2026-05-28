@@ -47,6 +47,14 @@ namespace API.Controllers
             return Ok(tarefa);
         }
 
+        [HttpGet("dashboard")]
+        public async Task<IActionResult> Dashboard()
+        {
+            var dashboard = await _service.ObterDashboardAsync();
+
+            return Ok(dashboard);
+        }
+
 
     }
 }

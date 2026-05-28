@@ -9,11 +9,11 @@ namespace Infrastruture.Database
 {
     public static class Configuracao
     {
-        public static string NomeInstancia { get; private set; }
-        public static string NomeUsuario { get; private set; }
-        public static string NomeSenha { get; private set; }
-        public static string NomeBanco { get; private set; }
-        public static string StringConexao { get; private set; }
+        public static string? NomeInstancia { get; private set; }
+        public static string? NomeUsuario { get; private set; }
+        public static string? NomeSenha { get; private set; }
+        public static string? NomeBanco { get; private set; }
+        public static string? StringConexao { get; private set; }
 
         private static readonly string caminhoArquivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PDVFinanceiro\\Config\\config.xml");
 
@@ -21,7 +21,7 @@ namespace Infrastruture.Database
         {
             try
             {
-                string diretorio = Path.GetDirectoryName(caminhoArquivo);
+                string? diretorio = Path.GetDirectoryName(caminhoArquivo);
                 if (!Directory.Exists(diretorio))
                     Directory.CreateDirectory(diretorio);
 

@@ -27,22 +27,35 @@ namespace UI.View
         #region Variaveis
 
         private readonly TarefaService _service;
-        private readonly AcaoFormulario _acao;
+        private readonly EtapaService _etapaService;
+
+        private AcaoFormulario _acao;
         private TAREFA _tarefa;
-        //private readonly EtapaService _etapaService;
-        //private ETAPA? _etapa;
         #endregion
 
         #region Construtor
-        public TarefaCadastroView(AcaoFormulario acao,TAREFA? tarefaSelecionada)
+        public TarefaCadastroView(
+            TarefaService service,
+            EtapaService etapaService)
         {
             InitializeComponent();
 
-            _service = new TarefaService();
+            _service = service;
+            _etapaService = etapaService;
+        }
+        
+        public void Configurar(AcaoFormulario acao,TAREFA? tarefaSelecionada)
+        {
             _acao = acao;
+
             _tarefa = tarefaSelecionada ?? new TAREFA();
-            DataContext = new TarefaCadastroViewModel(_tarefa);
+
+            DataContext = new TarefaCadastroViewModel(
+                _tarefa,
+                _etapaService);
+
             CarregarCombo();
+
         }
 
         #endregion

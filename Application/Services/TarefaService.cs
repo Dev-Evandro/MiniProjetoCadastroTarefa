@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core.DTOs.Dashboard;
+using Core.Models;
 using Infrastruture.DAL;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace Application.Services
     {
         private readonly TarefaDAL _dal;
 
-        public TarefaService()
+        public TarefaService(TarefaDAL dal)
         {
-            _dal = new TarefaDAL();
+            _dal = dal;
         }
         public async Task<Guid> InserirAsync(TAREFA tarefa)
         {
@@ -49,6 +50,10 @@ namespace Application.Services
         public async Task AlterarStatusAsync(Guid id, bool inativo)
         {
             await _dal.AlterarStatusAsync(id, inativo);
+        }
+        public async Task<DashboardDTO> ObterDashboardAsync()
+        {
+            return await _dal.ObterDashboardAsync();
         }
 
     }

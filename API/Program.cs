@@ -1,4 +1,5 @@
 using Application.Services;
+using Infrastruture.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ var configService = new ConfiguracaoService();
 configService.Carregar();
 
 builder.Services.AddScoped<TarefaService>();
+builder.Services.AddScoped<TarefaDAL>();
 
 var app = builder.Build();
 

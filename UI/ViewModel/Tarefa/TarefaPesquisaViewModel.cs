@@ -36,10 +36,10 @@ namespace UI.ViewModel.Tarefa
                 OnPropertyChanged();
             }
         }
-        public TarefaPesquisaViewModel(INavigationService navigationService)
+        public TarefaPesquisaViewModel(INavigationService navigationService,TarefaService service)
         {
             _navigationService = navigationService;
-            _service = new TarefaService();
+            _service = service;
 
             PesquisarCommand = new RelayCommand.RelayCommand(async _ => await Pesquisar());
             IncluirCommand = new RelayCommand.RelayCommand(Incluir);
@@ -47,7 +47,6 @@ namespace UI.ViewModel.Tarefa
             ExcluirCommand = new RelayCommand.RelayCommand(Excluir, PodeAlterarExcluir);
 
             CarregarTarefas();
-            
         }
         public interface INavigationService
         {
@@ -80,7 +79,7 @@ namespace UI.ViewModel.Tarefa
         }
         private void CarregarTarefas()
         {
-
+            _ = Pesquisar();
         }
         private async Task Pesquisar()
         {

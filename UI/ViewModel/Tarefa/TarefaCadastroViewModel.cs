@@ -71,9 +71,9 @@ namespace UI.ViewModel.Tarefa
         public ICommand AdicionarEtapaCommand { get; }
         public ICommand AlterarEtapaCommand { get; }
         public ICommand RemoverEtapaCommand { get; }
-        public TarefaCadastroViewModel(TAREFA tarefa)
+        public TarefaCadastroViewModel(TAREFA tarefa, EtapaService etapaService)
         {
-            _etapaService = new EtapaService();
+            _etapaService = etapaService;
 
             Tarefa = tarefa;
 

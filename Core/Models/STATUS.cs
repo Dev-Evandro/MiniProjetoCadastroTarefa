@@ -9,7 +9,7 @@ namespace Core.Models
     public class STATUS
     {
         public int Id { get; set; }
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
         public virtual ICollection<TAREFA> Tarefas { get; set; } = new List<TAREFA>();
     }
 
