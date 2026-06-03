@@ -12,7 +12,6 @@ namespace UI.ViewModel.Etapa
 {
     public class EtapaCadastroViewModel : ViewModelBase
     {
-
         private readonly EtapaService _service;
 
         public ETAPA Etapa { get; set; }
@@ -22,9 +21,9 @@ namespace UI.ViewModel.Etapa
 
         public event Action? FecharTela;
 
-        public EtapaCadastroViewModel(Guid tarefaId, ETAPA? etapa = null)
+        public EtapaCadastroViewModel(EtapaService service,Guid tarefaId,ETAPA? etapa = null)
         {
-            _service = new EtapaService();
+            _service = service;
 
             Etapa = etapa ?? new ETAPA
             {
@@ -36,15 +35,16 @@ namespace UI.ViewModel.Etapa
 
             SalvarCommand = new RelayCommand.RelayCommand(async _ => await Salvar());
             CancelarCommand = new RelayCommand.RelayCommand(_ => FecharTela?.Invoke());
-        }
 
+            
+        }
         private async Task Salvar()
         {
-            if (Etapa.Id == Guid.Empty)
+            if (Etapa.Id == Guid.Empty) 
                 await _service.InserirAsync(Etapa);
-            else
-                await _service.AtualizarAsync(Etapa);
-
+            else 
+                await _service.AtualizarAsync(Etapa); 
+            
             FecharTela?.Invoke();
         }
     }

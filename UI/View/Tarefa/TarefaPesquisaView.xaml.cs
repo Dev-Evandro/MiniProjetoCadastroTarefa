@@ -16,6 +16,7 @@ using UI.ViewModel.Tarefa;
 using Core.Enums;
 using UI.ViewModel.NavigationService;
 using Microsoft.Extensions.DependencyInjection;
+using UI.Helpers;
 
 namespace UI.View.Tarefa
 {
@@ -33,7 +34,7 @@ namespace UI.View.Tarefa
 
         private void Vm_AbrirCadastro(TAREFA tarefa,AcaoFormulario acao)
         {
-            var frm = App.Services.GetRequiredService<TarefaCadastroView>();
+            var frm = ViewFactory.Resolve<TarefaCadastroView>();
 
             frm.Configurar(acao, tarefa);
             frm.ShowDialog();

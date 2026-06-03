@@ -32,7 +32,7 @@ namespace UI.ViewModel.Tarefa
             }
         }
         private int _abaSelecionada;
-        public int AabaSelecionada
+        public int AbaSelecionada
         {
             get => _abaSelecionada;
             set
@@ -79,10 +79,10 @@ namespace UI.ViewModel.Tarefa
 
             ListaEtapas = new ObservableCollection<ETAPA>();
 
-            ConsultarEtapaCommand = new UI.ViewModel.RelayCommand.RelayCommand(async _ => await CarregarEtapas());
-            AdicionarEtapaCommand = new UI.ViewModel.RelayCommand.RelayCommand(AdicionarEtapa);
-            AlterarEtapaCommand = new UI.ViewModel.RelayCommand.RelayCommand(AlterarEtapa, _ => EtapaSelecionada != null);
-            RemoverEtapaCommand = new UI.ViewModel.RelayCommand.RelayCommand(RemoverEtapa, _ => EtapaSelecionada != null);
+            ConsultarEtapaCommand = new RelayCommand.RelayCommand(async _ => await CarregarEtapas());
+            AdicionarEtapaCommand = new RelayCommand.RelayCommand(AdicionarEtapa);
+            AlterarEtapaCommand = new RelayCommand.RelayCommand(AlterarEtapa, _ => EtapaSelecionada != null);
+            RemoverEtapaCommand = new RelayCommand.RelayCommand(RemoverEtapa, _ => EtapaSelecionada != null);
         }
         private async Task CarregarEtapas()
         {

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UI.Helpers;
 using UI.View.Tarefa;
 using UI.ViewModel.Tarefa;
 

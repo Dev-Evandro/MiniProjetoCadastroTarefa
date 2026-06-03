@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,14 @@ namespace UI.View
     /// </summary>
     public partial class EtapaCadastroView : Window
     {
-        public EtapaCadastroView(Guid tarefaId,ETAPA? etapa = null)
+        public EtapaCadastroView(Guid tarefaId, ETAPA? etapa = null)
         {
             InitializeComponent();
-            var vm = new EtapaCadastroViewModel(tarefaId, etapa);
+
+            var vm = ActivatorUtilities.CreateInstance<EtapaCadastroViewModel>(App.Services,tarefaId,etapa);
+
             vm.FecharTela += () => this.Close();
+
             DataContext = vm;
         }
     }

@@ -7,6 +7,7 @@ using System.Data;
 using System.Windows;
 using UI.View;
 using UI.View.Tarefa;
+using UI.ViewModel.Etapa;
 using UI.ViewModel.NavigationService;
 using UI.ViewModel.Tarefa;
 using static UI.ViewModel.Tarefa.TarefaPesquisaViewModel;
@@ -19,19 +20,14 @@ namespace UI
     public partial class App : System.Windows.Application
     {
 
-        public static ServiceProvider? Services { get; private set; }
+        public static ServiceProvider Services { get; private set; } = null!;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             var serviceCollection = new ServiceCollection();
 
             ConfigureServices(serviceCollection);
-
             Services = serviceCollection.BuildServiceProvider();
-
-            //var mainWindow = Services.GetRequiredService<MainWindow>();
-            
-            //mainWindow.Show();
 
             base.OnStartup(e);
         }
@@ -41,17 +37,21 @@ namespace UI
             // DAL
             services.AddScoped<TarefaDAL>();
             services.AddScoped<EtapaDAL>();
+
             // Services
             services.AddScoped<TarefaService>();
             services.AddScoped<EtapaService>();
+            
+            services.AddTransient<EtapaService>();
+
             // Navigation
             services.AddSingleton<INavigationService, NavigationService>();
 
             // ViewModels
             services.AddTransient<TarefaPesquisaViewModel>();
+            services.AddTransient<EtapaCadastroViewModel>();
             
 
-            
             // Views
             services.AddTransient<TarefaCadastroView>();
             services.AddTransient<TarefaPesquisaView>();

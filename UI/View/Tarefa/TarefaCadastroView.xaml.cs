@@ -30,7 +30,7 @@ namespace UI.View
         private readonly EtapaService _etapaService;
 
         private AcaoFormulario _acao;
-        private TAREFA _tarefa;
+        private TAREFA? _tarefa;
         #endregion
 
         #region Construtor

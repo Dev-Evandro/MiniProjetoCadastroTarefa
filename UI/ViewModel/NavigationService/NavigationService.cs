@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using static UI.ViewModel.Tarefa.TarefaPesquisaViewModel;
 using UI.View;
 using Microsoft.Extensions.DependencyInjection;
+using UI.Helpers;
 
 namespace UI.ViewModel.NavigationService
 {
@@ -15,7 +16,7 @@ namespace UI.ViewModel.NavigationService
     {
         public void AbrirTarefaCadastro(TAREFA? tarefa, AcaoFormulario acao)
         {
-            var frm = App.Services.GetRequiredService<TarefaCadastroView>();
+            var frm = ViewFactory.Resolve<TarefaCadastroView>();
             frm.Configurar(acao,tarefa);
             frm.ShowDialog();
         }
