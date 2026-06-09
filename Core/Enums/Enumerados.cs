@@ -30,9 +30,16 @@ namespace Core.Enums
         Cancelada = 4,
         Atrasada = 5
     }
-    public enum Formulario
+    public enum TipoFormulario
     {
         Tarefas = 1,
         TarefasCad = 2
+    }
+    public enum TipoTela
+    {
+        Dashboard,
+        Tarefas,
+        Etapas,
+        Usuarios
     }
 }
