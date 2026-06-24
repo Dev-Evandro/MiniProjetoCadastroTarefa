@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="DTOs\Etapa\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>
