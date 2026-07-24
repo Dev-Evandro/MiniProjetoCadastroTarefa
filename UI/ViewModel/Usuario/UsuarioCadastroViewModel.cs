@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace UI.ViewModel.Usuario
 {
-    internal class UsuarioCadastroViewModel
+    public class UsuarioCadastroViewModel
     {
+
     }
 }
