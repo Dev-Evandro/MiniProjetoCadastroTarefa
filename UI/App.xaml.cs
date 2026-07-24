@@ -1,4 +1,5 @@
 ﻿using Application.Services;
+using Core.Interfaces;
 using Infrastruture.DAL;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -37,12 +38,14 @@ namespace UI
             // DAL
             services.AddScoped<TarefaDAL>();
             services.AddScoped<EtapaDAL>();
+            services.AddScoped<IUsuarioDAL, UsuarioDAL>();
+            
 
             // Services
             services.AddScoped<TarefaService>();
             services.AddScoped<EtapaService>();
-            
-            services.AddTransient<EtapaService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<ISenhaService, SenhaService>();
 
             // Navigation
             services.AddSingleton<INavigationService, NavigationService>();

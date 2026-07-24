@@ -12,15 +12,5 @@ namespace Core.Interfaces
     {
         Task InserirAsync(UsuarioCompletoDTO dto);
 
-        Task AtualizarAsync(
-            USUARIO usuario,
-            PermissoesUsuario permissoes);
-        
-
-        Task<UsuarioCompletoDTO?> ObterPorIdAsync(Guid usuarioId);
-
-        Task<IEnumerable<USUARIO>> ListarAsync();
-
-        Task ExcluirAsync(Guid usuarioId);
     }
 }

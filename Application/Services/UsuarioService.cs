@@ -13,32 +13,45 @@ namespace Application.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioDAL _usuarioDAL;
+        private readonly ISenhaService _senhaService;
 
-        public UsuarioService(IUsuarioDAL usuarioDAL)
+
+        public UsuarioService(IUsuarioDAL usuarioDAL,ISenhaService senhaService)
         {
             _usuarioDAL = usuarioDAL;
+            _senhaService = senhaService;
         }
 
-        public async Task InserirAsync(USUARIO usuario,PermissoesUsuario permissoes)
+        public async Task InserirAsync(UsuarioCompletoDTO dto)
         {
-            if (string.IsNullOrWhiteSpace(usuario.Nome))
-                throw new Exception("Informe o nome.");
+            ArgumentNullException.ThrowIfNull(dto);
 
-            if (string.IsNullOrWhiteSpace(usuario.Login))
-                throw new Exception("Informe o login.");
+            if (string.IsNullOrWhiteSpace(dto.Usuario.Nome))
+                throw new ArgumentException("Informe o nome do usuário.");
 
-            usuario.UsuarioId = Guid.NewGuid();
-            usuario.DataCadastro = DateTime.Now;
-            usuario.Inativo = false;
+            if (string.IsNullOrWhiteSpace(dto.Usuario.Login))
+                throw new ArgumentException("Informe o login do usuário.");
 
-            string permissoesJson =
-                JsonSerializer.Serialize(permissoes);
+            if (string.IsNullOrWhiteSpace(dto.Usuario.SenhaHash))
+                throw new ArgumentException("Informe a senha do usuário.");
 
-            await _usuarioDAL.InserirAsync(
-                usuario,
-                permissoesJson);
+            dto.Usuario.UsuarioId = Guid.NewGuid();
+            dto.Usuario.DataCadastro = DateTime.Now;
+            dto.Usuario.DataAtualizacao = null;
+            dto.Usuario.Inativo = false;
+
+            if (await _usuarioDAL.LoginExisteAsync(dto.Usuario.Login))
+                throw new InvalidOperationException("Este login já está cadastrado.");
+
+            dto.Usuario.SenhaHash = _senhaService.GerarHash(dto.Usuario.SenhaHash);
+
+            string permissoesJson = JsonSerializer.Serialize(dto.Permissoes);
+
+            await _usuarioDAL.InserirAsync(dto.Usuario,permissoesJson);
         }
 
+        
+        #region ImplementarDepois
         public async Task AtualizarAsync(USUARIO usuario,PermissoesUsuario permissoes)
         {
 
@@ -59,9 +72,6 @@ namespace Application.Services
 
         }
 
-        public Task InserirAsync(UsuarioCompletoDTO dto)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }

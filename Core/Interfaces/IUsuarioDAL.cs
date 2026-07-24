@@ -14,15 +14,6 @@ namespace Core.Interfaces
             USUARIO usuario,
             string permissoesJson);
 
-        Task AtualizarAsync(
-            USUARIO usuario,
-            string permissoesJson);
-
-        Task<UsuarioCompletoDTO?> ObterPorIdAsync(
-            Guid usuarioId);
-
-        Task<IEnumerable<USUARIO>> ListarAsync();
-
-        Task ExcluirAsync(Guid usuarioId);
+        Task<bool> LoginExisteAsync(string login);
     }
 }
