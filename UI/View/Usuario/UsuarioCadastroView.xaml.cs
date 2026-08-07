@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using UI.ViewModel.Usuario;
+
 
 namespace UI.View.Usuario
 {
@@ -19,39 +11,34 @@ namespace UI.View.Usuario
     /// </summary>
     public partial class UsuarioCadastroView : Window
     {
-        public UsuarioCadastroView()
+        private readonly UsuarioCadastroViewModel _viewModel;
+
+        public UsuarioCadastroView(
+            UsuarioCadastroViewModel viewModel)
         {
             InitializeComponent();
+
+            _viewModel = viewModel;
+            DataContext = _viewModel;
+
+            _viewModel.FecharTela += FecharTela;
+        }
+        private void FecharTela()
+        {
+            Close();
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            _viewModel.FecharTela -= FecharTela;
+            base.OnClosed(e);
         }
 
-        private void btnConfirmar_Click(object sender, RoutedEventArgs e)
+        private void txtSenha_PasswordChanged(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void txtDescricao_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void txtSenha_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void btnAdicionarFoto_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void chkInativo_Checked(object sender, RoutedEventArgs e)
-        {
-
+            if (sender is PasswordBox passwordBox)
+            {
+                _viewModel.Senha = passwordBox.Password;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+
 namespace Application.Services
 {
     public class UsuarioService : IUsuarioService
@@ -15,8 +16,9 @@ namespace Application.Services
         private readonly IUsuarioDAL _usuarioDAL;
         private readonly ISenhaService _senhaService;
 
-
-        public UsuarioService(IUsuarioDAL usuarioDAL,ISenhaService senhaService)
+        public UsuarioService(
+            IUsuarioDAL usuarioDAL,
+            ISenhaService senhaService)
         {
             _usuarioDAL = usuarioDAL;
             _senhaService = senhaService;
@@ -35,43 +37,44 @@ namespace Application.Services
             if (string.IsNullOrWhiteSpace(dto.Usuario.SenhaHash))
                 throw new ArgumentException("Informe a senha do usuário.");
 
+            if (await _usuarioDAL.LoginExisteAsync(dto.Usuario.Login))
+            {
+                throw new InvalidOperationException(
+                    "Este login já está cadastrado.");
+            }
+
             dto.Usuario.UsuarioId = Guid.NewGuid();
             dto.Usuario.DataCadastro = DateTime.Now;
             dto.Usuario.DataAtualizacao = null;
+
+            // Todo usuário novo deve começar ativo.
             dto.Usuario.Inativo = false;
 
-            if (await _usuarioDAL.LoginExisteAsync(dto.Usuario.Login))
-                throw new InvalidOperationException("Este login já está cadastrado.");
+            dto.Usuario.SenhaHash =
+                _senhaService.GerarHash(dto.Usuario.SenhaHash);
 
-            dto.Usuario.SenhaHash = _senhaService.GerarHash(dto.Usuario.SenhaHash);
+            NormalizarPermissoes(dto.Permissoes);
 
-            string permissoesJson = JsonSerializer.Serialize(dto.Permissoes);
+            string permissoesJson =
+                JsonSerializer.Serialize(dto.Permissoes);
 
-            await _usuarioDAL.InserirAsync(dto.Usuario,permissoesJson);
+            await _usuarioDAL.InserirAsync(
+                dto.Usuario,
+                permissoesJson);
         }
 
-        
-        #region ImplementarDepois
-        public async Task AtualizarAsync(USUARIO usuario,PermissoesUsuario permissoes)
+        private static void NormalizarPermissoes(
+            PermissoesUsuario permissoes)
         {
+            foreach (var permissao in permissoes.Telas.Values)
+            {
+                if (permissao.Visualizar)
+                    continue;
 
+                permissao.Cadastrar = false;
+                permissao.Editar = false;
+                permissao.Excluir = false;
+            }
         }
-
-        public async Task<UsuarioCompletoDTO?> ObterPorIdAsync(Guid usuarioId)
-        {
-            return null;
-        }
-
-        public async Task<IEnumerable<USUARIO>> ListarAsync()
-        {
-            return Enumerable.Empty<USUARIO>();
-        }
-
-        public async Task ExcluirAsync(Guid usuarioId)
-        {
-
-        }
-
-        #endregion
     }
 }

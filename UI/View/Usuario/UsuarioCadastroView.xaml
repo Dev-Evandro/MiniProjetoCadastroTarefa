@@ -1,100 +1,242 @@
 ﻿<Window x:Class="UI.View.Usuario.UsuarioCadastroView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UI.View.Usuario"
-        mc:Ignorable="d"
-        Title="UsuarioCadastroView" Height="450" Width="800">
-    <Grid Background="White">
-        <DockPanel>
-            <StackPanel Margin="0,0,0,10" DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Center">
-                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                    <Label Content="Código" />
-                </StackPanel>
-                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                    <Label Content="Usuario" />
-                </StackPanel>
-                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                    <Label Content="Atualização" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="220,5,0,0"  >
-                    <Button x:Name="btnConfirmar" Content="_Confirmar" Margin="0,0,10,0" Click="btnConfirmar_Click"/>
-                    <Button x:Name="btnCancelar" Content="Ca_ncelar" Click="btnCancelar_Click" />
-                </StackPanel>
-            </StackPanel>
+        Title="Cadastro de Usuário"
+        Width="720"
+        Height="500"
+        MinWidth="650"
+        MinHeight="450"
+        WindowStartupLocation="CenterOwner"
+        Background="#F5F5F5">
+    <Window.Resources>
+        <BooleanToVisibilityConverter
+        x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
 
-            <StackPanel x:Name="stpRodape" DockPanel.Dock="Bottom" Orientation="Horizontal">
-                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                    <Label Content="Código" />
-                </StackPanel>
-                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                    <Label Content="Usuario" />
+    <Grid Margin="15">
 
-                </StackPanel>
-                <StackPanel Margin="0,0,5,0" Orientation="Vertical">
-                    <Label Content="Atualização" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-                </StackPanel>
-            </StackPanel>
+        <!-- AÇÕES -->
+        <Border Grid.Row="0"
+                Margin="0,0,0,10"
+                Padding="10"
+                Background="White"
+                CornerRadius="5">
 
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical" Width="350">
-                    <StackPanel Orientation="Horizontal" Margin="0,5">
-                        <Label Content="Descricao"  Margin="0,0,0,0"/>
-                        <TextBox x:Name="txtDescricao" KeyDown="txtDescricao_KeyDown" Width="250"/>
+            <Grid>
+                <TextBlock Text="Cadastro de usuário"
+                           VerticalAlignment="Center"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           Foreground="#2D3748"/>
 
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,5">
-                        <Label Content="Senha"  Margin="0,0,18,0"/>
-                        <TextBox x:Name="txtSenha" KeyDown="txtSenha_KeyDown" Width="250"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right">
 
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Width="350" Margin="0,5" >
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label Content="Tela Cadastro Estoque" Width="170" HorizontalAlignment="Left"/>
-                            <CheckBox Name="chkHabilitado" Content="Habilitado" Margin="10,5,5,0" IsChecked="True" />
-                            <Label Content="Tela Cadastro Venda" Width="170" HorizontalAlignment="Left"/>
-                            <CheckBox Name="chkHabilitado1" Content="Habilitado" Margin="10,5,5,0" IsChecked="True" />
-                            <Label Content="Tela Cadastro Vendedor" Width="170" HorizontalAlignment="Left"/>
-                            <CheckBox Name="chkHabilitado3" Content="Habilitado" Margin="10,5,5,0" IsChecked="True" />
-                            <Label Content="Tela Cadastro Tipo Animal" Width="170" HorizontalAlignment="Left"/>
-                            <CheckBox Name="chkHabilitado4" Content="Habilitado" Margin="10,5,5,0" IsChecked="True" />
+                    <Button Content="Salvar"
+                            Width="100"
+                            Command="{Binding SalvarCommand}"
+                            Style="{StaticResource PrimaryButton}"/>
 
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-
-                            <Label Content="Tela Cadastro Raca" Width="170" HorizontalAlignment="Left"/>
-                            <CheckBox Name="chkHabilitado5" Content="Habilitado" Margin="10,5,5,0" IsChecked="True" />
-                            <Label Content="Tela Cadastro Profissão" Width="170" HorizontalAlignment="Left"/>
-                            <CheckBox Name="chkHabilitado6" Content="Habilitado" Margin="10,5,5,0" IsChecked="True" />
-                            <Label Content="Tela Cadastro Fornecedor" Width="170" HorizontalAlignment="Left"/>
-                            <CheckBox Name="chkHabilitado7" Content="Habilitado" Margin="10,5,5,0" IsChecked="True" />
-                            <Label Content="Tela Cadastro Clientes" Width="170" HorizontalAlignment="Left"/>
-                            <CheckBox Name="chkHabilitado8" Content="Habilitado" Margin="10,5,5,0" IsChecked="True" />
-
-                        </StackPanel>
-
-
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Width="350" >
-
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center"  VerticalAlignment="Top"  Margin="10,10" Width="250" Height="250" Background="#FFE0DBDB">
-
-
-                    </StackPanel>
-                    <StackPanel VerticalAlignment="Bottom" Margin="10,10" Width="150" >
-                        <Button x:Name="btnAdicionarFoto" Margin="5,5" Width="90" Height="20" Content="Adicionar Foto" Click="btnAdicionarFoto_Click" />
-                    </StackPanel>
-
+                    <Button Content="Cancelar"
+                            Width="100"
+                            Command="{Binding CancelarCommand}"
+                            Style="{StaticResource DangerButton}"/>
 
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Width="150" VerticalAlignment="Top">
-                    <CheckBox Name="chkInativo" Content="Inativo" HorizontalAlignment="Right" Margin="0,05,30,0" IsChecked="False"  Checked="chkInativo_Checked"  />
+            </Grid>
+        </Border>
+
+        <!-- CONTEÚDO -->
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- DADOS DO USUÁRIO -->
+            <Border Grid.Column="0"
+                    Margin="0,0,10,0"
+                    Padding="15"
+                    Background="White"
+                    CornerRadius="5">
+
+                <StackPanel>
+
+                    <TextBlock Text="Dados do usuário"
+                               Margin="0,0,0,15"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Foreground="#2D3748"/>
+
+                    <Label Content="Nome"/>
+
+                    <TextBox Height="30"
+                             Padding="5,0"
+                             VerticalContentAlignment="Center"
+                             Text="{Binding Cadastro.Usuario.Nome,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Label Content="Login"
+                           Margin="0,10,0,0"/>
+
+                    <TextBox Height="30"
+                             Padding="5,0"
+                             VerticalContentAlignment="Center"
+                             Text="{Binding Cadastro.Usuario.Login,
+                                            UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Label Content="Senha"
+                           Margin="0,10,0,0"/>
+
+                    <PasswordBox x:Name="txtSenha"
+                                 Height="30"
+                                 Padding="5,0"
+                                 VerticalContentAlignment="Center"
+                                 PasswordChanged="txtSenha_PasswordChanged"/>
+
+                    <TextBlock Margin="0,8,0,0"
+                               Foreground="#718096"
+                               FontSize="11"
+                               Text="A senha será armazenada de forma protegida."/>
+
+                </StackPanel>
+            </Border>
+
+            <!-- PERMISSÕES -->
+            <Border Grid.Column="1"
+        Padding="15"
+        Background="White"
+        CornerRadius="5">
+
+                <StackPanel>
+
+                    <TextBlock Text="Permissões de acesso"
+                   FontSize="16"
+                   FontWeight="SemiBold"
+                   Foreground="#2D3748"/>
+
+                    <TextBlock Margin="0,5,0,15"
+                   Foreground="#718096"
+                   TextWrapping="Wrap"
+                   Text="Selecione as telas e expanda para configurar as ações permitidas."/>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+
+                        <ItemsControl ItemsSource="{Binding Cadastro.Permissoes.Telas}">
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Border Margin="0,0,0,8"
+                                Padding="8"
+                                Background="#F7FAFC"
+                                BorderBrush="#E2E8F0"
+                                BorderThickness="1"
+                                CornerRadius="5">
+
+                                        <Expander>
+
+                                            <!-- CABEÇALHO DA TELA -->
+                                            <Expander.Header>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="130"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock Text="{Binding Key}"
+                                                   VerticalAlignment="Center"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="#2D3748"/>
+
+                                                    <CheckBox Grid.Column="1"
+                                                  Content="Permitir acesso"
+                                                  Margin="10,0,0,0"
+                                                  VerticalAlignment="Center"
+                                                  IsChecked="{Binding Value.Visualizar,
+                                                                      Mode=TwoWay,
+                                                                      UpdateSourceTrigger=PropertyChanged}"/>
+                                                </Grid>
+                                            </Expander.Header>
+
+                                            <!-- AÇÕES DA TELA -->
+                                            <Border Margin="15,10,0,0"
+                                        Padding="10"
+                                        Background="White"
+                                        CornerRadius="4">
+
+                                                <StackPanel IsEnabled="{Binding Value.Visualizar}">
+
+                                                    <TextBlock Text="Ações permitidas"
+                                                   Margin="0,0,0,8"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="#4A5568"/>
+
+                                                    <CheckBox Content="Cadastrar"
+                                                  Margin="0,4"
+                                                  IsChecked="{Binding Value.Cadastrar,
+                                                                      Mode=TwoWay}"/>
+
+                                                    <CheckBox Content="Editar"
+                                                  Margin="0,4"
+                                                  IsChecked="{Binding Value.Editar,
+                                                                      Mode=TwoWay}"/>
+
+                                                    <CheckBox Content="Excluir"
+                                                  Margin="0,4"
+                                                  IsChecked="{Binding Value.Excluir,
+                                                                      Mode=TwoWay}"/>
+
+                                                </StackPanel>
+                                            </Border>
+
+                                        </Expander>
+                                    </Border>
+
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- RODAPÉ -->
+        <Border Grid.Row="2"
+                Margin="0,10,0,0"
+                Padding="10"
+                Background="White"
+                CornerRadius="5">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Código: "
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Text="{Binding Cadastro.Usuario.UsuarioId}"/>
                 </StackPanel>
 
-            </StackPanel>
-        </DockPanel>
+                <CheckBox Grid.Column="1" 
+                          Content="Usuário inativo" 
+                          IsChecked="{Binding Cadastro.Usuario.Inativo}"
+                          Visibility="{Binding ExibirCampoInativo,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+            </Grid>
+        </Border>
+
     </Grid>
 </Window>

@@ -8,9 +8,11 @@ using System.Data;
 using System.Windows;
 using UI.View;
 using UI.View.Tarefa;
+using UI.View.Usuario;
 using UI.ViewModel.Etapa;
 using UI.ViewModel.NavigationService;
 using UI.ViewModel.Tarefa;
+using UI.ViewModel.Usuario;
 using static UI.ViewModel.Tarefa.TarefaPesquisaViewModel;
 
 namespace UI
@@ -53,11 +55,13 @@ namespace UI
             // ViewModels
             services.AddTransient<TarefaPesquisaViewModel>();
             services.AddTransient<EtapaCadastroViewModel>();
-            
+            services.AddTransient<UsuarioCadastroViewModel>();
+
 
             // Views
             services.AddTransient<TarefaCadastroView>();
             services.AddTransient<TarefaPesquisaView>();
+            services.AddTransient<UsuarioCadastroView>();
             services.AddTransient<MainWindow>();
         }
 
