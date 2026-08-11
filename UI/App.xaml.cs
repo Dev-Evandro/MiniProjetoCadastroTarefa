@@ -56,12 +56,14 @@ namespace UI
             services.AddTransient<TarefaPesquisaViewModel>();
             services.AddTransient<EtapaCadastroViewModel>();
             services.AddTransient<UsuarioCadastroViewModel>();
+            services.AddTransient<UsuarioPesquisaViewModel>();
 
 
             // Views
             services.AddTransient<TarefaCadastroView>();
             services.AddTransient<TarefaPesquisaView>();
             services.AddTransient<UsuarioCadastroView>();
+            services.AddTransient<UsuarioPesquisaView>();
             services.AddTransient<MainWindow>();
         }
 

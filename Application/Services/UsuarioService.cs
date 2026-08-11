@@ -28,6 +28,9 @@ namespace Application.Services
         {
             ArgumentNullException.ThrowIfNull(dto);
 
+            dto.Usuario.Nome = dto.Usuario.Nome.Trim();
+            dto.Usuario.Login = dto.Usuario.Login.Trim();
+
             if (string.IsNullOrWhiteSpace(dto.Usuario.Nome))
                 throw new ArgumentException("Informe o nome do usuário.");
 
@@ -36,6 +39,18 @@ namespace Application.Services
 
             if (string.IsNullOrWhiteSpace(dto.Usuario.SenhaHash))
                 throw new ArgumentException("Informe a senha do usuário.");
+
+            if (dto.Usuario.Nome.Length > 100)
+                throw new ArgumentException(
+                    "O nome deve possuir no máximo 100 caracteres.");
+
+            if (dto.Usuario.Login.Length > 50)
+                throw new ArgumentException(
+                    "O login deve possuir no máximo 50 caracteres.");
+
+            if (dto.Usuario.SenhaHash.Length < 6)
+                throw new ArgumentException(
+                    "A senha deve possuir pelo menos 6 caracteres.");
 
             if (await _usuarioDAL.LoginExisteAsync(dto.Usuario.Login))
             {
@@ -46,8 +61,6 @@ namespace Application.Services
             dto.Usuario.UsuarioId = Guid.NewGuid();
             dto.Usuario.DataCadastro = DateTime.Now;
             dto.Usuario.DataAtualizacao = null;
-
-            // Todo usuário novo deve começar ativo.
             dto.Usuario.Inativo = false;
 
             dto.Usuario.SenhaHash =

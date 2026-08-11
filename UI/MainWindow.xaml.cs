@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UI.Helpers;
 using UI.View.Tarefa;
+using UI.View.Usuario;
 using UI.ViewModel.Tarefa;
 
 namespace UI
@@ -47,6 +48,15 @@ namespace UI
 
             f?.Show();
             this.Close();
+        }
+
+        private void AbrirUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            var view = App.Services.GetRequiredService<UsuarioPesquisaView>();
+
+            view.Owner = this;
+
+            view.ShowDialog();
         }
     }
 }
