@@ -12,5 +12,13 @@ namespace Core.Interfaces
     {
         Task InserirAsync(UsuarioCompletoDTO dto);
 
+        Task<List<UsuarioListagemDTO>> ListarAsync(string? filtro,bool inativo = false);
+
+        Task<UsuarioCompletoDTO?> ConsultarPorIdAsync(Guid usuarioId,bool inativo = false);
+
+        Task AtualizarAsync(UsuarioCompletoDTO dto,string? novaSenha = null);
+
+        Task AlterarStatusAsync(Guid usuarioId,bool inativo);
+
     }
 }

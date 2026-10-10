@@ -10,10 +10,20 @@ namespace Core.Interfaces
 {
     public interface IUsuarioDAL
     {
-        Task InserirAsync(
-            USUARIO usuario,
-            string permissoesJson);
+        Task InserirAsync(USUARIO usuario,string permissoesJson);
 
-        Task<bool> LoginExisteAsync(string login);
+        Task<bool> LoginExisteAsync(string login,Guid? ignorarUsuarioId = null);
+
+        Task<List<USUARIO>> ListarAsync(string? filtro,bool inativo = false);
+
+        Task<(USUARIO Usuario, string PermissoesJson)?> ConsultarPorIdAsync(
+            Guid usuarioId,
+            bool inativo = false);
+
+        Task AtualizarAsync(USUARIO usuario,string permissoesJson,bool atualizarSenha);
+
+        Task AlterarStatusAsync(Guid usuarioId, bool inativo);
+
+
     }
 }
