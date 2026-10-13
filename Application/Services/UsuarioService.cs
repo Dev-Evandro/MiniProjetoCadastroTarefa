@@ -88,11 +88,22 @@ namespace Application.Services
             }
         }
 
-        public async Task<List<USUARIO>> ListarAsync(string? filtro,bool inativo = false)
+        public async Task<List<UsuarioListagemDTO>> ListarAsync(string? filtro,bool inativo = false)
         {
-            return await _usuarioDAL.ListarAsync(filtro, inativo);
-        }
+            var usuarios = await _usuarioDAL.ListarAsync(filtro, inativo);
 
+            return usuarios
+                .Select(usuario => new UsuarioListagemDTO
+                {
+                    UsuarioId = usuario.UsuarioId,
+                    Nome = usuario.Nome,
+                    Login = usuario.Login,
+                    DataCadastro = usuario.DataCadastro,
+                    DataAtualizacao = usuario.DataAtualizacao,
+                    Inativo = usuario.Inativo
+                })
+                .ToList();
+        }
         public async Task<UsuarioCompletoDTO?> ConsultarPorIdAsync(Guid usuarioId,bool inativo = false)
         {
             var registro = await _usuarioDAL.ConsultarPorIdAsync(
